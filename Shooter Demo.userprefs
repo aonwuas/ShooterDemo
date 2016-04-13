@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Ship\Bullet.cs">
+    <Files>
+      <File FileName="..\Class 2\Assets\PlayerInput.cs" Line="27" Column="2" />
+      <File FileName="Assets\Scripts\Ship\PlayerInput.cs" Line="17" Column="10" />
+      <File FileName="Assets\Scripts\Bullet\Projectile.cs" Line="15" Column="1" />
+      <File FileName="Assets\Scripts\Ship\ShipController.cs" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\Ship\GunControl.cs" Line="5" Column="34" />
+      <File FileName="Assets\Scripts\Ship\Bullet.cs" Line="3" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
