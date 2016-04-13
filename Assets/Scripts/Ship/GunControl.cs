@@ -3,21 +3,26 @@ using System.Collections;
 
 public class GunControl : MonoBehaviour {
 	public PlayerInput _playerInput;
-	public Bullet bulletPrefab;
+	public GameObject projectile;
+	public GameObject[] _hardpoints;
 	// Use this for initialization
 	void Start () {
 		_playerInput = transform.GetComponentInParent<PlayerInput>();
+		_hardpoints = GameObject.FindGameObjectsWithTag("Gun");
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (_playerInput._fire){
-			Debug.Log("Firing bullet");
-			_playerInput._fire = false;
+		if (_playerInput._isFiring){
+			foreach(GameObject g in _hardpoints){
+				fireProjectile(g);
+			}
+			_playerInput._isFiring = false;
 		}
 	}
-
-	void fireProjectile(){
-		Bullet projectile = (Bullet)Instantiate(bulletPrefab,this.transform.position, this.transform.rotation);
+	
+	void fireProjectile(GameObject g){
+		Debug.Log("Firing bullet from" + g.name);
+		Rigidbody2D projectileInstance = Instantiate(projectile, g.transform.position, Quaternion.Euler(new Vector3(1,0,0))) as Rigidbody2D;
 	}
 }

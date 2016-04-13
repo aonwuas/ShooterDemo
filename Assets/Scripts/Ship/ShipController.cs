@@ -4,10 +4,11 @@ using System.Collections;
 public class ShipController : MonoBehaviour {
 	public PlayerInput _playerInput;
 	public float _maxSpeed = 8f;
+
 	// Use this for initialization
 	void Start () {
 		_playerInput = transform.GetComponent<PlayerInput>();
-	
+
 	}
 
 	void FixedUpdate () {

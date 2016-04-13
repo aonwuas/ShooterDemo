@@ -3,11 +3,14 @@ using System.Collections;
 
 public class Bullet : Projectile {
 	public int _type = (int)_projectile_type.BULLET;
-	public float _bulletVelocity = 20f;
-	public int lifeTime = 5;
+	public float _bulletVelocity;
+	public int lifeTime;
 	// Use this for initialization
 	void Start () {
+		this.lifeTime = 1;
+		this._bulletVelocity = 15f;
 		destroyThis(lifeTime);
+		this.GetComponent<Rigidbody2D> ().velocity  = new Vector2 (0, _bulletVelocity);
 	}
 
 	void Awake() {
