@@ -13,15 +13,15 @@ public class PlayerInput : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		horizontalMovement();
-		checkFire();
+		HorizontalMovement();
+		CheckFire();
 	}
 
-	public void horizontalMovement(){
+	public void HorizontalMovement(){
 		_hMove = Input.GetAxis("Horizontal");
 		_vMove = Input.GetAxis("Vertical");
 	}
-	private void checkFire(){
+	private void CheckFire(){
 		if( Input.GetButtonDown("Fire1") ){
 			_isFiring = true;
 		}

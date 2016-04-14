@@ -15,14 +15,13 @@ public class GunControl : MonoBehaviour {
 	void FixedUpdate () {
 		if (_playerInput._isFiring){
 			foreach(GameObject g in _hardpoints){
-				fireProjectile(g);
+				FireProjectile(g);
 			}
 			_playerInput._isFiring = false;
 		}
 	}
 	
-	void fireProjectile(GameObject g){
-		Debug.Log("Firing bullet from" + g.name);
-		Rigidbody2D projectileInstance = Instantiate(projectile, g.transform.position, Quaternion.Euler(new Vector3(1,0,0))) as Rigidbody2D;
+	void FireProjectile(GameObject g){
+		Rigidbody2D projectileInstance = Instantiate(projectile, g.transform.position, Quaternion.identity) as Rigidbody2D;
 	}
 }

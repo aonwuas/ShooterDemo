@@ -4,17 +4,20 @@ using System.Collections;
 public class Bullet : Projectile {
 	public int _type = (int)_projectile_type.BULLET;
 	public float _bulletVelocity;
-	public int lifeTime;
-	// Use this for initialization
-	void Start () {
-		this.lifeTime = 1;
-		this._bulletVelocity = 15f;
-		destroyThis(lifeTime);
-		this.GetComponent<Rigidbody2D> ().velocity  = new Vector2 (0, _bulletVelocity);
-	}
+	public float _lifeTime;
+
 
 	void Awake() {
+		_lifeTime = 2f;
+		_bulletVelocity = 15f;
+		
+	}
 
+
+	// Use this for initialization
+	void Start () {
+		Destroy(this.gameObject, _lifeTime);
+		this.GetComponent<Rigidbody2D> ().velocity  = new Vector2 (0, _bulletVelocity);
 	}
 
 	// Update is called once per frame
@@ -22,16 +25,13 @@ public class Bullet : Projectile {
 	
 	}
 
-	void OnCollision2D(Collider2D other){
-		if( other.tag == "enemy" ){
-			destroyThis ();
+	void OnTriggerEnter2D(Collider2D other)	{
+
+		if( other.tag == "Enemy" ){
+			Destroy(other.gameObject);
+			Destroy(this.gameObject);
 		}
 	}
 
-
-
-	void destroyThis(int duration = 0){
-		Destroy(this.gameObject, duration);
-	}
 }
 		

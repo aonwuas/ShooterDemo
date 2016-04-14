@@ -1,0 +1,19 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemy\Enemy.cs">
+    <Files>
+      <File FileName="Documents\PlatformerDemoScripts\Rocket.cs" Line="1" Column="3" />
+      <File FileName="Assets\Scripts\Ship\Bullet.cs" Line="23" Column="36" />
+      <File FileName="Assets\Scripts\Ship\GunControl.cs" Line="16" Column="31" />
+      <File FileName="Assets\Scripts\Ship\PlayerInput.cs" Line="17" Column="3" />
+      <File FileName="Assets\Scripts\Ship\ShipController.cs" Line="24" Column="1" />
+      <File FileName="Documents\PlatformerDemoScripts\Enemy.cs" Line="16" Column="54" />
+      <File FileName="Assets\Scripts\Enemy\Enemy.cs" Line="39" Column="124" />
+      <File FileName="Assets\Swawner.cs" Line="15" Column="8" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
