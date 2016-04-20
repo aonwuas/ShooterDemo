@@ -8,9 +8,14 @@ public class Enemy : MonoBehaviour {
 	public float _vSpeed;
 	public float _moveSpeed;
 	public float _enemySpeed;
+	public int _alt;
+	public float _timeScale;
+
+	//public float _currentSpeed;
 
 	void Awake(){
-		_amplitude = 3f;
+		_alt = 0;
+		_amplitude = 10f;
 		_vSpeed = -1f;
 		_moveSpeed = 1f;
 		_enemySpeed = 5f;
@@ -28,14 +33,25 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Hurt(){
+
 	}
 
 	void FixedUpdate() {
-		 FollowPath();
+		float deltaT = (Time.time - _creationTime)*5f;
+		//this.transform.position.x = _startPosition.x + Mathf.Cos (deltaT);
+		this.transform.position = new Vector2 (Mathf.Clamp(_startPosition.x + Mathf.Cos(deltaT) * _amplitude, -5, 5), _startPosition.y);
+		//FollowPath ();
+
 	}
 
 	void FollowPath(){
-		float deltaT = Time.time - _creationTime;
-		this.GetComponent<Rigidbody2D>().velocity = _enemySpeed * new Vector2(_amplitude * Mathf.Cos(deltaT), _vSpeed/_enemySpeed * 1f);
+		float deltaT = (Time.time - _creationTime)*5f;
+		this.GetComponent<Rigidbody2D>().velocity = _enemySpeed * new Vector2(_amplitude * Mathf.Cos(deltaT), _vSpeed/_enemySpeed * 5f);
 	}
+
+	/*
+	void lerp (float min, float max)
+	{
+		_currentSpeed = Mathf.Lerp (min, max, Time.time);
+	}*/
 }
