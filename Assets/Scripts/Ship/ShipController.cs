@@ -4,9 +4,11 @@ using System.Collections;
 public class ShipController : MonoBehaviour {
 	public PlayerInput _playerInput;
 	public float _baseSpeed = 8f;
+	public float _scrollSpeed;
 
 	// Use this for initialization
 	void Start () {
+		_scrollSpeed = 2f;
 		_playerInput = transform.GetComponent<PlayerInput>();
 
 	}
