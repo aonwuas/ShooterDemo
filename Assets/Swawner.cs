@@ -2,17 +2,27 @@
 using System.Collections;
 
 public class Swawner : MonoBehaviour {
-	public GameObject enemy;
+	private GameObject _enemy;
+    private float _duration;
+    private float _delay;
 	// Use this for initialization
 	void Start () {
-		InvokeRepeating("SpawnEnemy", 3f, 0.25f);
+        this._enemy = (GameObject)Resources.Load("Prefabs/Enemy/Enemy");
+        Destroy(this, _duration + _delay);
+        InvokeRepeating("SpawnEnemy", _delay, 0.25f);
 	}
 	
+    void Awake()
+    {
+        this._delay = 0f;
+        this._duration = 1f;
+    }
+
 	// Update is called once per frame
 	void Update () {
 
 	}
 	void SpawnEnemy(){
-		Rigidbody2D enemyInstance = Instantiate(enemy, this.transform.position, Quaternion.identity) as Rigidbody2D;
+		Rigidbody2D enemyInstance = Instantiate(_enemy, this.transform.position, Quaternion.identity) as Rigidbody2D;
 	}
 }

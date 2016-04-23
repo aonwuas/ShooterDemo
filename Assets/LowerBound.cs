@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : MonoBehaviour {
-	public enum _projectile_type {BULLET, LASER, LINE};
-	//private int _damage;
+public class LowerBound : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
+	
 	}
 	
 	// Update is called once per frame
@@ -13,6 +13,9 @@ public class Projectile : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-	}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+        Destroy(other.gameObject);
+    }
 }

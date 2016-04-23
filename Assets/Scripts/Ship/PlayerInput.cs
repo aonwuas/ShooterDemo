@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour {
 	public float _hMove, _vMove;
-	private float _currentRotation;//	, _maxRotation = 5;
 	public bool _isFiring = false;
 
 	// Use this for initialization

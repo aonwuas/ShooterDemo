@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Bullet : Projectile {
-	GameInfo _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
+    GameInfo _gameInfo;
 	public int _type = (int)_projectile_type.BULLET;
 	public float _bulletVelocity;
 	public float _lifeTime;
@@ -10,7 +10,8 @@ public class Bullet : Projectile {
 
 
 	void Awake() {
-		_lifeTime = 2f;
+        _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
+        _lifeTime = 2f;
 		_bulletVelocity = 15f;
 		_bulletDamage = 10;
 
