@@ -48,8 +48,7 @@ public class Enemy : MonoBehaviour
     {
         if (this._vulnerable) { _health -= damage; }
         if (_health <= 0)
-        {
-            Debug.Log("I hath been slain!");
+        {   
             Destroy(this.gameObject);
         }
     }

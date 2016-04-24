@@ -24,6 +24,10 @@ public class PlayerInput : MonoBehaviour {
 		if( Input.GetButtonDown("Fire1") ){
 			_isFiring = true;
 		}
+        if(Input.GetButtonUp("Fire1"))
+        {
+            _isFiring = false;
+        }
 	}
 	
 }

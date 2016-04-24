@@ -23,6 +23,7 @@ public class GameInfo : MonoBehaviour {
     //Player Variables
     public int _bulletBaseDamage;
     public int _bulletLevel;
+    public int _bulletFireRate;
     
 	void Start () {
 	}
@@ -41,6 +42,7 @@ public class GameInfo : MonoBehaviour {
         //PlayerVariables
 		_bulletBaseDamage = 5;
 		_bulletLevel = 1;
+        _bulletFireRate = 3;
 	}
 
     public void scrollSpeed(int speed = 1)
