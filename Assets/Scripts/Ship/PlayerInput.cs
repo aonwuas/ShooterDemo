@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour {
 	public float _hMove, _vMove;
-	private float _currentRotation;//	, _maxRotation = 5;
 	public bool _isFiring = false;
 
 	// Use this for initialization
@@ -25,6 +24,10 @@ public class PlayerInput : MonoBehaviour {
 		if( Input.GetButtonDown("Fire1") ){
 			_isFiring = true;
 		}
+        if(Input.GetButtonUp("Fire1"))
+        {
+            _isFiring = false;
+        }
 	}
 	
 }
