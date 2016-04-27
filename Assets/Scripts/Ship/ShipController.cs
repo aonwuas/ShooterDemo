@@ -3,18 +3,26 @@ using System.Collections;
 
 public class ShipController : MonoBehaviour {
 	public PlayerInput _playerInput;
-	public float _baseSpeed = 8f;
+	GameInfo _gameInfo;
+	public float _hMoveSpeed;
+	public float _vMoveSpeed;
 	public float _scrollSpeed;
 
 	// Use this for initialization
-	void Start () {
-		_scrollSpeed = 2f;
-		_playerInput = transform.GetComponent<PlayerInput>();
 
+	void Awake(){
+		_gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
+
+		_playerInput = transform.GetComponent<PlayerInput>();
+	}
+	void Start () {
+		_hMoveSpeed = _gameInfo._shipBaseHSpeed;
+		_vMoveSpeed = _gameInfo._shipBaseVSpeed;
+		_scrollSpeed = _gameInfo._scrollSpeed;
 	}
 
 	void FixedUpdate () {
-		GetComponent<Rigidbody2D>().velocity = new Vector2(_playerInput._hMove * _baseSpeed, _playerInput._vMove * _baseSpeed);
+		GetComponent<Rigidbody2D>().velocity = new Vector2(_playerInput._hMove * _hMoveSpeed, _playerInput._vMove * _vMoveSpeed);
 	}
 
 

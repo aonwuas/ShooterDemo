@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
         _moveSpeed = 1f;
         _enemySpeed = 5f;
         _hSpeed = 5f;
-
         _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
     }
 
@@ -49,7 +48,8 @@ public class Enemy : MonoBehaviour
         if (this._vulnerable) { _health -= damage; }
         if (_health <= 0)
         {   
-            Destroy(this.gameObject);
+			_gameInfo._playerScore += 5;
+			Die();
         }
     }
     
@@ -57,6 +57,13 @@ public class Enemy : MonoBehaviour
     {
 
     }
+
+	private void Die(){
+		_gameInfo._playerScore = _gameInfo._playerScore + ( _gameInfo._enemyBaseScore * _gameInfo._difficultyLevel * 5 );
+		Debug.Log ("Adding: " +_gameInfo._enemyBaseScore * _gameInfo._difficultyLevel * 5);
+		Debug.Log ("After addition: " + _gameInfo._playerScore);
+		Destroy(this.gameObject);
+	}
 
     void setVelocity(int _scrollSpeed = 1)
     {

@@ -21,13 +21,12 @@ public class PlayerInput : MonoBehaviour {
 		_vMove = Input.GetAxis("Vertical");
 	}
 	private void CheckFire(){
-		if( Input.GetButtonDown("Fire1") ){
+		if (Input.GetMouseButton (0)) {
 			_isFiring = true;
 		}
-        if(Input.GetButtonUp("Fire1"))
-        {
-            _isFiring = false;
-        }
+		else {
+			_isFiring = false;
+		}
 	}
 	
 }

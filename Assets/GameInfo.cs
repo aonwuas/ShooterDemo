@@ -19,11 +19,15 @@ public class GameInfo : MonoBehaviour {
     public int _enemyBaseHealth;
 	public int _enemyBaseDamage;
     public int _enemyBaseSpeed;
+	public int _enemyBaseScore;
 
     //Player Variables
     public int _bulletBaseDamage;
     public int _bulletLevel;
     public int _bulletFireRate;
+	public float _shipBaseHSpeed;
+	public float _shipBaseVSpeed;
+	public int _playerScore;
     
 	void Start () {
 	}
@@ -38,11 +42,16 @@ public class GameInfo : MonoBehaviour {
         _enemyBaseSpeed = 1;
 		_enemyBaseHealth = 15;
 		_enemyBaseDamage = 1;
+		_enemyBaseScore = 2;
 
         //PlayerVariables
 		_bulletBaseDamage = 5;
 		_bulletLevel = 1;
         _bulletFireRate = 3;
+		_shipBaseHSpeed = 40f;
+		_shipBaseVSpeed = 20f;
+		_playerScore = 0;
+
 	}
 
     public void scrollSpeed(int speed = 1)

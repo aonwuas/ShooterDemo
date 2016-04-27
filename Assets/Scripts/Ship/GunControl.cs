@@ -9,6 +9,10 @@ public class GunControl : MonoBehaviour
     private GameInfo _gameInfo;
     private float firingDelay;
     private float nextShot;
+	public Vector2 relativeVector;
+	public Camera _camera;
+	private bool bullet;
+	private bool shotgun;
     // Use this for initialization
     void Start()
     {
@@ -18,6 +22,9 @@ public class GunControl : MonoBehaviour
         _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
         firingDelay = 1f / _gameInfo._bulletFireRate;
         nextShot = 0;
+		_camera = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<Camera> ();
+		bullet = true;
+		shotgun = false;
     }
 
     // Update is called once per frame
@@ -35,7 +42,7 @@ public class GunControl : MonoBehaviour
     void FireController()
     {
         if (_playerInput._isFiring)
-        {
+		{
             if (Time.time >= nextShot)
             {
                 foreach (GameObject g in _hardpoints)
@@ -59,6 +66,11 @@ public class GunControl : MonoBehaviour
 
     void FireProjectile(GameObject g)
     {
-        Rigidbody2D projectileInstance = Instantiate(projectile, g.transform.position, Quaternion.identity) as Rigidbody2D;
+		if (bullet) {
+			Rigidbody2D projectileInstance = Instantiate (projectile, g.transform.position, Quaternion.identity) as Rigidbody2D;
+		}
+		if (shotgun) {
+
+		}
     }
 }

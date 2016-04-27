@@ -11,20 +11,17 @@ public class Bullet : Projectile {
 
 	void Awake() {
         _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
-        _lifeTime = 2f;
+        _lifeTime = 4f;
 		_bulletVelocity = 15f;
 		_bulletDamage = 10;
-
-		
 	}
 
 
 	// Use this for initialization
 	void Start () {
 		Destroy(this.gameObject, _lifeTime);
-		//_bulletDamage = _gameInfo._bulletBaseDamage * _gameInfo._bulletLevel;
+		_bulletDamage = _gameInfo._bulletBaseDamage * _gameInfo._bulletLevel;
 		this.GetComponent<Rigidbody2D> ().velocity  = new Vector2 (0, _bulletVelocity);
-
 	}
 
 	// Update is called once per frame
@@ -36,6 +33,11 @@ public class Bullet : Projectile {
 
 		if( other.tag == "Enemy" ){
 			other.gameObject.GetComponent<Enemy>().Hurt(_bulletDamage);
+			Destroy(this.gameObject);
+		}
+
+		if (other.tag == "MainCamera")
+		{
 			Destroy(this.gameObject);
 		}
 	}
