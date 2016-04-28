@@ -11,11 +11,11 @@ public class ShipController : MonoBehaviour {
 	// Use this for initialization
 
 	void Awake(){
-		_gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
 
-		_playerInput = transform.GetComponent<PlayerInput>();
 	}
 	void Start () {
+		_gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
+		_playerInput = transform.GetComponent<PlayerInput>();
 		_hMoveSpeed = _gameInfo._shipBaseHSpeed;
 		_vMoveSpeed = _gameInfo._shipBaseVSpeed;
 		_scrollSpeed = _gameInfo._scrollSpeed;

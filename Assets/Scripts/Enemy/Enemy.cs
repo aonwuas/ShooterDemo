@@ -8,23 +8,16 @@ public class Enemy : MonoBehaviour
     private float _creationTime;
     private Vector2 _startPosition;
     public float _amplitude;
-    public float _hSpeed;
-    public float _vSpeed;
-    public float _moveSpeed;
-    public float _enemySpeed;
+	public float _enemySpeed;
     public int _health;
-    public float _timeScale;
-    public int direction = 1;
     public bool _vulnerable = false;
 
     //public float _currentSpeed;
 
     void Awake()
     {
+
         _amplitude = 10.3f;
-        _moveSpeed = 1f;
-        _enemySpeed = 5f;
-        _hSpeed = 5f;
         _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
     }
 
@@ -32,7 +25,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _health = _gameInfo._enemyBaseHealth * _gameInfo._difficultyLevel;
-        _vSpeed = _gameInfo._difficultyLevel;
+		_enemySpeed = _gameInfo._difficultyLevel * _gameInfo._enemyBaseSpeed;
         _creationTime = Time.time;
         _startPosition = this.transform.position;
     }
@@ -46,9 +39,7 @@ public class Enemy : MonoBehaviour
     public void Hurt(int damage)
     {
         if (this._vulnerable) { _health -= damage; }
-        if (_health <= 0)
-        {   
-			_gameInfo._playerScore += 5;
+        if (_health <= 0){
 			Die();
         }
     }
@@ -60,16 +51,14 @@ public class Enemy : MonoBehaviour
 
 	private void Die(){
 		_gameInfo._playerScore = _gameInfo._playerScore + ( _gameInfo._enemyBaseScore * _gameInfo._difficultyLevel * 5 );
-		Debug.Log ("Adding: " +_gameInfo._enemyBaseScore * _gameInfo._difficultyLevel * 5);
-		Debug.Log ("After addition: " + _gameInfo._playerScore);
 		Destroy(this.gameObject);
 	}
 
     void setVelocity(int _scrollSpeed = 1)
     {
         float deltaT = (Time.time - _creationTime);
-        float lerped = Mathf.Lerp(0f, _amplitude, (1f + Mathf.Cos(_vSpeed * deltaT)) / 2f) - (_amplitude / 2f);
-        this.GetComponent<Rigidbody2D>().velocity = new Vector2(_vSpeed * lerped, -1f);
+		float lerped = Mathf.Lerp(0f, _amplitude, (1f + Mathf.Cos(_enemySpeed * deltaT)) / 2f) - (_amplitude / 2f);
+		this.GetComponent<Rigidbody2D>().velocity = new Vector2(_enemySpeed * lerped, -1 * _enemySpeed);
 
     }
 }

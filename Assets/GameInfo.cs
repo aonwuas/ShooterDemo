@@ -24,6 +24,7 @@ public class GameInfo : MonoBehaviour {
     //Player Variables
     public int _bulletBaseDamage;
     public int _bulletLevel;
+	public int _bulletSpeed;
     public int _bulletFireRate;
 	public float _shipBaseHSpeed;
 	public float _shipBaseVSpeed;
@@ -33,13 +34,12 @@ public class GameInfo : MonoBehaviour {
 	}
 
 	void Awake(){
-
         //Game Variables
         _scrollSpeed = 1;
         _difficultyLevel = 1;
 
         //Enemy Variables
-        _enemyBaseSpeed = 1;
+        _enemyBaseSpeed = 4;
 		_enemyBaseHealth = 15;
 		_enemyBaseDamage = 1;
 		_enemyBaseScore = 2;
@@ -47,7 +47,8 @@ public class GameInfo : MonoBehaviour {
         //PlayerVariables
 		_bulletBaseDamage = 5;
 		_bulletLevel = 1;
-        _bulletFireRate = 3;
+		_bulletSpeed = 9;
+        _bulletFireRate = 10;
 		_shipBaseHSpeed = 40f;
 		_shipBaseVSpeed = 20f;
 		_playerScore = 0;
@@ -57,7 +58,6 @@ public class GameInfo : MonoBehaviour {
     public void scrollSpeed(int speed = 1)
     {
         _scrollSpeed = speed;
-        //Debug.Log("Scrollspeed is set to " + _scrollSpeed);
     }
 	
 	// Update is called once per frame
