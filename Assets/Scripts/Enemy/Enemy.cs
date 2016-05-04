@@ -50,14 +50,14 @@ public class Enemy : MonoBehaviour
     }
 
 	private void Die(){
-		_gameInfo._playerScore = _gameInfo._playerScore + ( _gameInfo._enemyBaseScore * _gameInfo._difficultyLevel * 5 );
+        _gameInfo.addPoints(true);
 		Destroy(this.gameObject);
 	}
 
     void setVelocity(int _scrollSpeed = 1)
     {
         float deltaT = (Time.time - _creationTime);
-		float lerped = Mathf.Lerp(0f, _amplitude, (1f + Mathf.Cos(_enemySpeed * deltaT)) / 2f) - (_amplitude / 2f);
+		float lerped = Mathf.Lerp(0f, _amplitude, (1f + Mathf.Cos(_enemySpeed * deltaT / 10)) / 2f) - (_amplitude / 2f);
 		this.GetComponent<Rigidbody2D>().velocity = new Vector2(_enemySpeed * lerped, -1 * _enemySpeed);
 
     }

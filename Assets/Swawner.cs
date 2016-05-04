@@ -9,13 +9,13 @@ public class Swawner : MonoBehaviour {
 	void Start () {
         this._enemy = (GameObject)Resources.Load("Prefabs/Enemy/Enemy");
         Destroy(this, _duration + _delay);
-        InvokeRepeating("SpawnEnemy", _delay, 0.25f);
+        InvokeRepeating("SpawnEnemy", _delay, _duration/10);
 	}
 	
     void Awake()
     {
         this._delay = 0f;
-        this._duration = 1f;
+        this._duration = 5;
     }
 
 	// Update is called once per frame

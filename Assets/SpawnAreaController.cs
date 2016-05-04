@@ -7,7 +7,7 @@ public class SpawnAreaController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this._spawner = (GameObject)Resources.Load("Prefabs/Enemy/Spawner");
-        InvokeRepeating("Spawn", 2f, 3f);
+        InvokeRepeating("Spawn", 2f, 10f);
     }
 
     void Awake()
