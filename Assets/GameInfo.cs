@@ -49,7 +49,7 @@ public class GameInfo : MonoBehaviour {
         //PlayerVariables
         _bulletBaseDamage = 5;
         _bulletLevel = 1;
-        _bulletSpeed = 9;
+        _bulletSpeed = 20;
         _bulletFireRate = 10;
         _shipBaseHSpeed = 40f;
         _shipBaseVSpeed = 20f;
@@ -77,9 +77,9 @@ public class GameInfo : MonoBehaviour {
             switch (Element.name)
             {
                 case "Score":
-                    scoreUIElement = Element; Debug.Log("Found Score!"); break;
+                    scoreUIElement = Element; break;
                 case "HealthBar":
-                    healthBarUIElement = Element; Debug.Log("Found HealthBar!"); break;
+                    healthBarUIElement = Element; break;
             }
         }
         adjustHealth(0, false);
@@ -99,6 +99,18 @@ public class GameInfo : MonoBehaviour {
     {
         healthBarUIElement.GetComponent<UnityEngine.UI.Slider>().value = playerHealth;
         healthBarUIElement.GetComponentsInChildren<UnityEngine.UI.Text>()[0].text = playerHealth.ToString();
+    }
+
+    public float relativeAngle(Vector2 from, Vector2 to)
+    {
+        Vector2 diff = (from - to).normalized;
+        float angle = Vector2.Angle(diff, Vector2.down);
+        float cross = Vector3.Cross(diff, Vector2.down).normalized.z;
+        if (cross > 0)
+        {
+            angle = 360 - angle;
+        }
+        return angle;
     }
     
 }

@@ -35,14 +35,16 @@ public class LaserController : ProjectileController
     {
         this.bulletLevel += 1;
         this.speed += 1;
-        cooldown = 1f / (_gameInfo._bulletFireRate + bulletLevel);
+        cooldown = 3f / (_gameInfo._bulletFireRate + bulletLevel);
     }
-
     public void FireLaser(Vector2 startPosition, Vector2 targetPosition)
     {
+
+        
         GameObject newBullet = GameObject.Instantiate(this.instantiationObject, startPosition, Quaternion.identity) as GameObject;
-        newBullet.GetComponent<Laser>().setController(this);
-        newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed);
+        newBullet.GetComponent<Laser>().setController(this);    
+        newBullet.GetComponent<Rigidbody2D>().velocity = 50 * (targetPosition-startPosition).normalized;
+        newBullet.transform.rotation = Quaternion.AngleAxis(_gameInfo.relativeAngle(startPosition, targetPosition), new Vector3(0, 0, 1));
     }
 
     // Update is called once per frame

@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{26D588B5-D55A-370B-FD9E-D1EC4645093C}</ProjectGuid>
+	<ProjectGuid>{EEC8CAEA-FE7F-C190-F808-EAE8A58FE3CA}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -49,15 +49,20 @@
      <Compile Include="Assets\AcceleratorZone.cs" />
      <Compile Include="Assets\CameraScript.cs" />
      <Compile Include="Assets\GameInfo.cs" />
+     <Compile Include="Assets\LaserController.cs" />
+     <Compile Include="Assets\LaserGun.cs" />
      <Compile Include="Assets\LowerBound.cs" />
+     <Compile Include="Assets\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\Bullet\ProjectileController.cs" />
      <Compile Include="Assets\Scripts\BulletController.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Ship\Bullet.cs" />
      <Compile Include="Assets\Scripts\Ship\BulletGun.cs" />
+     <Compile Include="Assets\Scripts\Ship\Laser.cs" />
      <Compile Include="Assets\Scripts\Ship\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Ship\ShipController.cs" />
+     <Compile Include="Assets\ScrollingBackground.cs" />
      <Compile Include="Assets\SpawnAreaController.cs" />
      <Compile Include="Assets\Swawner.cs" />
  <Reference Include="UnityEngine.UI">

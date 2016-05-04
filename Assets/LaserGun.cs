@@ -8,7 +8,6 @@ public class LaserGun : MonoBehaviour
     private LaserController controller;
     private GameInfo gameInfo;
     private PlayerInput input;
-    //private Animator animator;
     private float aspeed = 2f;
     private ShipController shipControl;
     private float nextFire;
@@ -17,16 +16,13 @@ public class LaserGun : MonoBehaviour
     void Start()
     {
         input = this.transform.GetComponentInParent<PlayerInput>();
-        shipControl = this.transform.GetComponentInParent<ShipController>();
-        //this.animator = this.GetComponent<Animator>();
         gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
         controller = gameInfo.GetComponent<LaserController>();
-        //this.animator.speed = aspeed;
     }
 
     void Awaken()
     {
-        nextFire = 0;
+        nextFire = 0f;
     }
 
     void FixedUpdate()
@@ -34,8 +30,14 @@ public class LaserGun : MonoBehaviour
   
         if (input._isFiring)
         {
-                controller.FireLaser(this.transform.position, Input.mousePosition);
+            if (Time.time > nextFire)
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 pPos = transform.position;
+                controller.FireLaser(pPos, mousePos);
                 nextFire = Time.time + controller.cooldown;
+            }
+            
         }
 
     }
