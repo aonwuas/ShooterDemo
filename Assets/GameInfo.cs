@@ -19,20 +19,33 @@ public class GameInfo : MonoBehaviour {
 
     //Enemy Variables
     public GameObject _enemySpawn;
-    public int _enemyBaseHealth;
-    public int _enemyBaseDamage;
-    public int _enemyBaseSpeed;
-    public int _enemyBaseScore;
+    public int enemyHealth;
+    public int enemyDamage;
+    public int enemySpeed;
+    public int enemyScore;
+
+    //Bullet Variables
+    public float bulletSpeed;
+    public float bulletDamage;
+    public float bulletCooldown;
+    
+    //Laser Variables
+    public float laserSpeed;
+    public float laserDamage;
+    public float laserCooldown;
+
+    //Rocket Variables
+    public float rocketSpeed;
+    public float rocketDamage;
+    public float targetAcquisitionTime;
+
 
     //Player Variables
-    public int _bulletBaseDamage;
-    public int _bulletLevel;
-    public int _bulletSpeed;
-    public int _bulletFireRate;
-    public float _shipBaseHSpeed;
-    public float _shipBaseVSpeed;
-    public int _playerScore;
-    public int playerHealth;
+    public float shipHSpeed;
+    public float shipVSpeed;
+    public float playerScore;
+    public float playerHealth;
+    public int playerCurrency;
 
 
     void Awake() {
@@ -41,20 +54,25 @@ public class GameInfo : MonoBehaviour {
         _difficultyLevel = 1;
 
         //Enemy Variables
-        _enemyBaseSpeed = 4;
-        _enemyBaseHealth = 15;
-        _enemyBaseDamage = 1;
-        _enemyBaseScore = 2;
+        enemySpeed = 4;
+        enemyHealth = 15;
+        enemyDamage = 1;
+        enemyScore = 2;
 
         //PlayerVariables
-        _bulletBaseDamage = 5;
-        _bulletLevel = 1;
-        _bulletSpeed = 20;
-        _bulletFireRate = 10;
-        _shipBaseHSpeed = 40f;
-        _shipBaseVSpeed = 20f;
-        _playerScore = 0;
+        bulletDamage = 5;
+        bulletSpeed = 80;
+        bulletCooldown = 1;
+        shipHSpeed = 40f;
+        shipVSpeed = 20f;
+        playerScore = 0;
         playerHealth = 100;
+        playerCurrency = 0;
+
+        //Laser Variables
+        laserSpeed = 40;
+        laserDamage = 30;
+        laserCooldown = 0.5f;
 
     }
 
@@ -82,21 +100,20 @@ public class GameInfo : MonoBehaviour {
                     healthBarUIElement = Element; break;
             }
         }
-        adjustHealth(0, false);
-        addPoints(false);
+        healthBarUIElement.GetComponent<UnityEngine.UI.Slider>().value = playerHealth;
+        healthBarUIElement.GetComponentsInChildren<UnityEngine.UI.Text>()[0].text = playerHealth.ToString();
+        scoreUIElement.GetComponent<UnityEngine.UI.Text>().text = playerScore.ToString();
     }
 
-    public void addPoints(bool valueChange)
+    public void addPoints(Enemy e)
     {
-        if (valueChange)
-        {
-            _playerScore += (_enemyBaseScore * _difficultyLevel * 5);
-        }
-        scoreUIElement.GetComponent<UnityEngine.UI.Text>().text = _playerScore.ToString();
-       
+        playerScore += e.pointValue;
+        playerCurrency += e.pointValue;
+        scoreUIElement.GetComponent<UnityEngine.UI.Text>().text = playerScore.ToString();
     }
-    public void adjustHealth(int healthChange, bool isDamage)
+    public void adjustHealth(Enemy e)
     {
+        playerHealth -= e.damage;
         healthBarUIElement.GetComponent<UnityEngine.UI.Slider>().value = playerHealth;
         healthBarUIElement.GetComponentsInChildren<UnityEngine.UI.Text>()[0].text = playerHealth.ToString();
     }

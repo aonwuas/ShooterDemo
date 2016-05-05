@@ -4,7 +4,7 @@ using System.Collections;
 public class ProjectileController : MonoBehaviour {
 	public enum projectile_type {BULLET, LASER, LINE};
 	protected GameObject instantiationObject;
-	protected int damage;
+	protected float damage;
 
 	// Use this for initialization
 	void Start () {

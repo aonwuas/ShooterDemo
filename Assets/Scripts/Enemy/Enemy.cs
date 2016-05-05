@@ -3,14 +3,17 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-    GameInfo _gameInfo;
-
+    GameInfo gameInfo;
+    public float damage;
+    public int pointValue;
     private float _creationTime;
     private Vector2 _startPosition;
     public float _amplitude;
 	public float _enemySpeed;
-    public int _health;
+    public float _health;
     public bool _vulnerable = false;
+    MovementPattern.ZigZagPattern move;
+    MovementPattern.TargetedPattern tmove;
 
     //public float _currentSpeed;
 
@@ -18,25 +21,30 @@ public class Enemy : MonoBehaviour
     {
 
         _amplitude = 10.3f;
-        _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
+        gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
     }
 
     // Use this for initialization
     void Start()
     {
-        _health = _gameInfo._enemyBaseHealth * _gameInfo._difficultyLevel;
-		_enemySpeed = _gameInfo._difficultyLevel * _gameInfo._enemyBaseSpeed;
+        _health = gameInfo.enemyHealth * gameInfo._difficultyLevel;
+		_enemySpeed = gameInfo._difficultyLevel * gameInfo.enemySpeed;
         _creationTime = Time.time;
         _startPosition = this.transform.position;
+        damage = 5;
+        pointValue = 5;
+        move = new MovementPattern.ZigZagPattern(80, 15, 25, this.gameObject);
+        tmove = new MovementPattern.TargetedPattern(10, 1, this.gameObject, GameObject.FindGameObjectWithTag("Player"));
     }
 
     // Update is called once per frame
     void Update()
     {
-        setVelocity(_gameInfo._scrollSpeed);
+        //move.Move();
+        tmove.Move();
     }
 
-    public void Hurt(int damage)
+    public void Hurt(float damage)
     {
         if (this._vulnerable) { _health -= damage; }
         if (_health <= 0){
@@ -50,15 +58,16 @@ public class Enemy : MonoBehaviour
     }
 
 	private void Die(){
-        _gameInfo.addPoints(true);
+        gameInfo.addPoints(this);
 		Destroy(this.gameObject);
 	}
 
-    void setVelocity(int _scrollSpeed = 1)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        float deltaT = (Time.time - _creationTime);
-		float lerped = Mathf.Lerp(0f, _amplitude, (1f + Mathf.Cos(_enemySpeed * deltaT / 10)) / 2f) - (_amplitude / 2f);
-		this.GetComponent<Rigidbody2D>().velocity = new Vector2(_enemySpeed * lerped, -1 * _enemySpeed);
 
+        if (other.tag == "Player")
+        {
+            gameInfo.adjustHealth(this);
+        }
     }
 }

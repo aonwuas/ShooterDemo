@@ -1,15 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Ship\BulletGun.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MovementPattern.cs">
     <Files>
-      <File FileName="Assets\Scripts\Ship\PlayerInput.cs" Line="26" Column="21" />
-      <File FileName="Assets\Scripts\Ship\ShipController.cs" Line="8" Column="27" />
+      <File FileName="Assets\LaserGun.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Ship\PlayerInput.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Ship\ShipController.cs" Line="1" Column="1" />
       <File FileName="Assets\Swawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\GameInfo.cs" Line="51" Column="28" />
-      <File FileName="Assets\Scripts\Bullet\ProjectileController.cs" Line="4" Column="31" />
-      <File FileName="Assets\Scripts\Ship\Bullet.cs" Line="21" Column="3" />
-      <File FileName="Assets\Scripts\Ship\BulletGun.cs" Line="32" Column="23" />
-      <File FileName="Assets\Scripts\BulletController.cs" Line="21" Column="20" />
+      <File FileName="Assets\GameInfo.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Bullet\ProjectileController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Ship\Bullet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Ship\BulletGun.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BulletController.cs" Line="1" Column="1" />
+      <File FileName="Assets\LaserController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MovementPattern.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

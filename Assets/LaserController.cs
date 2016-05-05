@@ -3,12 +3,9 @@ using System.Collections;
 
 public class LaserController : ProjectileController
 {
-    projectile_type type = projectile_type.LASER;
-    private int bulletLevel = 0;
-    private float bulletLife = 5f;
     public float cooldown;
-    private int speed;
-    GameInfo _gameInfo;
+    private float speed;
+    GameInfo gameInfo;
 
 
     void Awaken()
@@ -19,24 +16,18 @@ public class LaserController : ProjectileController
     void Start()
     {
         this.instantiationObject = (GameObject)Resources.Load("Prefabs/Ship/Laser");
-        _gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
-        this.damage = _gameInfo._bulletBaseDamage;
-        speed = _gameInfo._bulletSpeed;
-        Upgrade();
+        gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
+        damage = gameInfo.laserDamage;
+        speed = gameInfo.laserSpeed;
+        cooldown = gameInfo.laserCooldown;
     }
 
     public void DealDamage(Enemy target, Laser b)
     {
-        target.Hurt(bulletLevel * this.damage);
+        target.Hurt(this.damage);
         Destroy(b.gameObject);
     }
 
-    public void Upgrade()
-    {
-        this.bulletLevel += 1;
-        this.speed += 1;
-        cooldown = 3f / (_gameInfo._bulletFireRate + bulletLevel);
-    }
     public void FireLaser(Vector2 startPosition, Vector2 targetPosition)
     {
 
@@ -44,7 +35,7 @@ public class LaserController : ProjectileController
         GameObject newBullet = GameObject.Instantiate(this.instantiationObject, startPosition, Quaternion.identity) as GameObject;
         newBullet.GetComponent<Laser>().setController(this);    
         newBullet.GetComponent<Rigidbody2D>().velocity = 50 * (targetPosition-startPosition).normalized;
-        newBullet.transform.rotation = Quaternion.AngleAxis(_gameInfo.relativeAngle(startPosition, targetPosition), new Vector3(0, 0, 1));
+        newBullet.transform.rotation = Quaternion.AngleAxis(gameInfo.relativeAngle(startPosition, targetPosition), new Vector3(0, 0, 1));
     }
 
     // Update is called once per frame

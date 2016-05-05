@@ -16,8 +16,8 @@ public class ShipController : MonoBehaviour {
 	void Start () {
 		_gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
 		_playerInput = transform.GetComponent<PlayerInput>();
-		_hMoveSpeed = _gameInfo._shipBaseHSpeed;
-		_vMoveSpeed = _gameInfo._shipBaseVSpeed;
+		_hMoveSpeed = _gameInfo.shipHSpeed;
+		_vMoveSpeed = _gameInfo.shipVSpeed;
 		_scrollSpeed = _gameInfo._scrollSpeed;
 	}
 
