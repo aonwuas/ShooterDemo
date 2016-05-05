@@ -40,8 +40,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //move.Move();
-        tmove.Move();
+        move.Move();
+        //tmove.Move();
     }
 
     public void Hurt(float damage)
