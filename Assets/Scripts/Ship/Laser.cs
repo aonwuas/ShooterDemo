@@ -13,6 +13,11 @@ public class Laser : ProjectileController
         this.controller = controller;
     }
 
+    void Start()
+    {
+        Destroy(this.gameObject, 5f);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
 
