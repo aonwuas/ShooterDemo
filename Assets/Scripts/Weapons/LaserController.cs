@@ -34,7 +34,7 @@ public class LaserController : ProjectileController
         
         GameObject newBullet = GameObject.Instantiate(this.instantiationObject, startPosition, Quaternion.identity) as GameObject;
         newBullet.GetComponent<Laser>().setController(this);    
-        newBullet.GetComponent<Rigidbody2D>().velocity = 50 * (targetPosition-startPosition).normalized;
+        newBullet.GetComponent<Rigidbody2D>().velocity = speed * (targetPosition-startPosition).normalized;
         newBullet.transform.rotation = Quaternion.AngleAxis(gameInfo.relativeAngle(startPosition, targetPosition), new Vector3(0, 0, 1));
     }
 

@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class BulletController : ProjectileController {
-	private int bulletLevel = 0;
 	public float cooldown;
 	private float speed;
 	GameInfo gameInfo;

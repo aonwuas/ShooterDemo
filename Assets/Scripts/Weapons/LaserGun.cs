@@ -8,7 +8,6 @@ public class LaserGun : MonoBehaviour
     private LaserController controller;
     private GameInfo gameInfo;
     private PlayerInput input;
-    private float aspeed = 2f;
     private ShipController shipControl;
     private float nextFire;
 
