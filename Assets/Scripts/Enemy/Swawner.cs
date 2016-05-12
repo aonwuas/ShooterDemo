@@ -23,6 +23,6 @@ public class Swawner : MonoBehaviour {
 
 	}
 	void SpawnEnemy(){
-		Rigidbody2D enemyInstance = Instantiate(_enemy, this.transform.position, Quaternion.identity) as Rigidbody2D;
+		Instantiate(_enemy, this.transform.position, Quaternion.identity);
 	}
 }

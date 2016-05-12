@@ -28,7 +28,7 @@ public class BulletGun : MonoBehaviour {
             {
 
                 controller.FireBullet(this.transform.position);
-                nextFire = Time.time + controller.cooldown;
+                nextFire = Time.time + gameInfo.bulletCooldown;
             }
 
 		}

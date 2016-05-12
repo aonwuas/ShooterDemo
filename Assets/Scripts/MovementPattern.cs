@@ -49,9 +49,9 @@ public class MovementPattern : MonoBehaviour {
     {
         Rigidbody2D thisBody, targetBody;
         Vector2 lastVector;
-        int aggression, moveSpeed;
+        float aggression, moveSpeed;
         float acquireTargetTime;
-        public TargetedPattern(int moveSpeed, int aggression, GameObject self, GameObject target)
+        public TargetedPattern(int moveSpeed, float aggression, GameObject self, GameObject target)
         {
             this.thisBody = self.GetComponent<Rigidbody2D>();
             this.targetBody = target.GetComponent<Rigidbody2D>();

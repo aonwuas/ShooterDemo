@@ -7,11 +7,15 @@ public class LineUIController : MonoBehaviour {
     public GameObject linePrefab;
     GameInfo gameInfo;
 
-
+    void Awake()
+    {
+        this.linePrefab = (GameObject)Resources.Load("Prefabs/UI/LineUpgrade");
+        gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
+    }
     void Start()
     {
         gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
-        linePrefab = (GameObject)Resources.Load("Prefabs/UI/LineUpgrade");
+        this.linePrefab = (GameObject)Resources.Load("Prefabs/UI/LineUpgrade");
     }
 
 
@@ -23,6 +27,7 @@ public class LineUIController : MonoBehaviour {
         private Text upgradeEffect;
         private Text upgradeCost;
         private Text targetLevel;
+        private Text upgrade_type;
         private Upgrades.upgrade_type uType;
         public int level;
 
@@ -47,13 +52,17 @@ public class LineUIController : MonoBehaviour {
                     case "Level":
                         targetLevel = t;
                         break;
+                    case "upgrade_type":
+                        upgrade_type = t;
+                        break;
                 }
             }
             uType = upgradeType;
             SetName(upgradeType, g);
             SetEffect(upgradeType, g);
             SetLevel(upgradeType, g);
-            SetCost("123");
+            upgrade_type.text =  upgradeType.ToString();
+            SetCost("5");
         }
 
         void SetName(Upgrades.upgrade_type type, GameInfo g)
@@ -83,6 +92,9 @@ public class LineUIController : MonoBehaviour {
                     break;
                 case Upgrades.upgrade_type.SSpeed:
                     this.upgradeName.text = "Ship Speed";
+                    break;
+                case Upgrades.upgrade_type.SRestore:
+                    this.upgradeName.text = "Repair Ship";
                     break;
                 case Upgrades.upgrade_type.RArea:
                     this.upgradeName.text = "Rocket AOE";
@@ -123,6 +135,9 @@ public class LineUIController : MonoBehaviour {
                     break;
                 case Upgrades.upgrade_type.SSpeed:
                     this.upgradeEffect.text = "Increase Ship Speed";
+                    break;
+                case Upgrades.upgrade_type.SRestore:
+                    this.upgradeEffect.text = "Repair Your Ship";
                     break;
                 case Upgrades.upgrade_type.RArea:
                     this.upgradeEffect.text = "Larger Explosion Radius";
@@ -172,34 +187,91 @@ public class LineUIController : MonoBehaviour {
                 case Upgrades.upgrade_type.RTurn:
                     this.targetLevel.text = g.rocketTurnLevel.ToString();
                     break;
+                case Upgrades.upgrade_type.SRestore:
+                    this.targetLevel.text = g.getMissingHealth().ToString();
+                    break;
             }
         }
-
-
-
-
-
+           
         void SetEffect(string effect) { this.upgradeEffect.text = effect; }
         void SetCost(string cost) { this.upgradeCost.text = cost; }
         void SetLevel(string level) { this.targetLevel.text = level; }
-
-
-        public void buttonClick(Upgrades.upgrade_type type)
-        {
-            upgrade.upgradeFunction(1);
-            //int currentLevel = 
-            //SetLevel(currentLevel.ToString());
-        }
-
     }
 
     public UILine newLineElement(Upgrades.upgrade_type upgradeType, Vector2 position, Transform parent)
     {
-        return new UILine( upgradeType,  position, linePrefab, gameInfo, parent);
+        return new UILine( upgradeType,  position, this.linePrefab, gameInfo, parent);
     }
 
     // Update is called once per frame
     void Update () {
 	
 	}
+
+    public void buttonClick()
+    {
+
+        string typeAsString = this.transform.FindChild("upgrade_type").GetComponent<UnityEngine.UI.Text>().text;
+        Upgrades.upgrade_type typeAsEnum = (Upgrades.upgrade_type)System.Enum.Parse(typeof(Upgrades.upgrade_type), typeAsString);
+        UnityEngine.UI.Text costTextBox = this.transform.FindChild("Cost").GetComponent<UnityEngine.UI.Text>();
+        int cost = System.Int32.Parse(costTextBox.text);
+        if (gameInfo.playerCurrency >= cost)
+        {
+            gameInfo.playerCurrency -= cost;
+            costTextBox.text = Mathf.FloorToInt(cost*3.5f).ToString();
+            MenuController.UpdatePointsText();
+
+            Upgrades u = new Upgrades(gameInfo, typeAsEnum);
+            u.upgradeFunction(1);
+
+            switch (typeAsEnum)
+            {
+                case Upgrades.upgrade_type.LCooldown:
+                    gameInfo.laserCooldownLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.laserCooldownLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.LDamage:
+                    gameInfo.laserDamageLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.laserDamageLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.LSpeed:
+                    gameInfo.laserSpeedLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.laserSpeedLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.BCooldown:
+                    gameInfo.bulletCooldownLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.bulletCooldownLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.BDamage:
+                    gameInfo.bulletDamageLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.bulletDamageLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.BSpeed:
+                    gameInfo.bulletSpeedLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.bulletSpeedLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.RCooldown:
+                    gameInfo.rocketCooldownLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.rocketCooldownLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.RTurn:
+                    gameInfo.rocketTurnLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.rocketTurnLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.RArea:
+                    gameInfo.rocketAreaLevel += 1;
+                    this.transform.FindChild("Level").GetComponent<UnityEngine.UI.Text>().text = gameInfo.rocketAreaLevel.ToString();
+                    break;
+                case Upgrades.upgrade_type.SSpeed:
+                    gameInfo.shipSpeedLevel += 1;
+                    break;
+                case Upgrades.upgrade_type.SHealth:
+                    gameInfo.shipHealthLevel += 1;
+                    break;
+                case Upgrades.upgrade_type.SRestore:
+                    break;
+            }
+            
+        }
+    }
 }

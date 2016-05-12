@@ -111,6 +111,7 @@ public class GameInfo : MonoBehaviour
     {
         public float vSpeed;
         public float hSpeed;
+        public int baseHealth;
     }
     public shipBase s;
 
@@ -130,7 +131,7 @@ public class GameInfo : MonoBehaviour
         //Ship Variables
         shipHSpeed = s.hSpeed = 40f;
         shipVSpeed = s.vSpeed = 20f;
-        shipHealth = 100;
+        shipHealth = s.baseHealth = 100;
         shipHPerLevel = 4f;
         shipVPerLevel = 2f;
         shipHealthPerLevel = 10f;
@@ -212,13 +213,34 @@ public class GameInfo : MonoBehaviour
         scoreUIElement.GetComponent<UnityEngine.UI.Text>().text = playerScore.ToString();
     }
 
+    public int getMissingHealth()
+    {
+        Debug.Log(Mathf.RoundToInt(GameObject.Find("HealthBar").GetComponent<UnityEngine.UI.Slider>().maxValue - GameObject.Find("HealthBar").GetComponent<UnityEngine.UI.Slider>().value));
+        return Mathf.RoundToInt(GameObject.Find("HealthBar").GetComponent<UnityEngine.UI.Slider>().maxValue - GameObject.Find("HealthBar").GetComponent<UnityEngine.UI.Slider>().value);
+    }
+
     public void addPoints(Enemy e)
     {
         playerScore += e.pointValue;
         playerCurrency += e.pointValue;
         scoreUIElement.GetComponent<UnityEngine.UI.Text>().text = playerScore.ToString();
     }
+
+    public void addPoints(ChaseEnemy e)
+    {
+        playerScore += e.pointValue;
+        playerCurrency += e.pointValue;
+        scoreUIElement.GetComponent<UnityEngine.UI.Text>().text = playerScore.ToString();
+    }
+
     public void adjustHealth(Enemy e)
+    {
+        shipHealth -= e.damage;
+        healthBarUIElement.GetComponent<UnityEngine.UI.Slider>().value = shipHealth;
+        healthBarUIElement.GetComponentsInChildren<UnityEngine.UI.Text>()[0].text = shipHealth.ToString();
+    }
+
+    public void adjustHealth(ChaseEnemy e)
     {
         shipHealth -= e.damage;
         healthBarUIElement.GetComponent<UnityEngine.UI.Slider>().value = shipHealth;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LaserController : ProjectileController
+public class RocketController : ProjectileController
 {
     public float cooldown;
     private float speed;
@@ -22,26 +22,19 @@ public class LaserController : ProjectileController
         cooldown = gameInfo.laserCooldown;
     }
 
-    public void DealDamage(Enemy target, Laser l)
+    public void DealDamage(Enemy target, Rocket r)
     {
         target.Hurt(this.damage);
-        Destroy(l.gameObject);
+        Destroy(r.gameObject);
     }
 
-    public void DealDamage(ChaseEnemy target, Laser l)
-    {
-        target.Hurt(this.damage);
-        Destroy(l.gameObject);
-    }
-
-    public void FireLaser(Vector2 startPosition, Vector2 targetPosition)
+    public void FireRocket(Vector2 startPosition, Vector2 targetPosition)
     {
         cooldown = gameInfo.laserCooldown;
         speed = gameInfo.laserSpeed;
         GameObject newBullet = GameObject.Instantiate(this.instantiationObject, startPosition, Quaternion.identity) as GameObject;
-        newBullet.GetComponent<Laser>().setController(this);    
-        newBullet.GetComponent<Rigidbody2D>().velocity = speed * (targetPosition-startPosition).normalized;
-        newBullet.transform.rotation = Quaternion.AngleAxis(gameInfo.relativeAngle(startPosition, targetPosition), new Vector3(0, 0, 1));
+        newBullet.GetComponent<Rocket>().setController(this);
+        newBullet.GetComponent<Rigidbody2D>().velocity = speed * (targetPosition - startPosition).normalized;
     }
 
     // Update is called once per frame

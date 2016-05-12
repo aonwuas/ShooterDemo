@@ -25,7 +25,14 @@ public class BulletController : ProjectileController {
 		Destroy(b.gameObject);
 	}
 
+    public void DealDamage(ChaseEnemy target, Bullet b)
+    {
+        target.Hurt(this.damage);
+        Destroy(b.gameObject);
+    }
+
 	public void FireBullet(Vector2 startPosition){
+        speed = gameInfo.bulletSpeed;
         Fire(startPosition, new Vector2(speed * 0f, speed));
         Fire(startPosition, new Vector2(speed / 5f, speed));
         Fire(startPosition, new Vector2(-speed/ 5f, speed));

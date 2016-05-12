@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{26D588B5-D55A-370B-FD9E-D1EC4645093C}</ProjectGuid>
+	<ProjectGuid>{EEC8CAEA-FE7F-C190-F808-EAE8A58FE3CA}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,26 +46,33 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AcceleratorZone.cs" />
-     <Compile Include="Assets\CameraScript.cs" />
-     <Compile Include="Assets\GameInfo.cs" />
-     <Compile Include="Assets\LaserController.cs" />
-     <Compile Include="Assets\LaserGun.cs" />
-     <Compile Include="Assets\LowerBound.cs" />
-     <Compile Include="Assets\NewBehaviourScript.cs" />
-     <Compile Include="Assets\Scripts\Bullet\ProjectileController.cs" />
-     <Compile Include="Assets\Scripts\BulletController.cs" />
+     <Compile Include="Assets\ChaseEnemy.cs" />
+     <Compile Include="Assets\ChaserSpawner.cs" />
+     <Compile Include="Assets\Rocket.cs" />
+     <Compile Include="Assets\RocketController.cs" />
+     <Compile Include="Assets\RocketGun.cs" />
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Enemy\SpawnAreaController.cs" />
+     <Compile Include="Assets\Scripts\Enemy\Swawner.cs" />
+     <Compile Include="Assets\Scripts\Game\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\Game\GameController.cs" />
+     <Compile Include="Assets\Scripts\Game\GameInfo.cs" />
+     <Compile Include="Assets\Scripts\Game\LowerBound.cs" />
+     <Compile Include="Assets\Scripts\Game\ScrollingBackground.cs" />
      <Compile Include="Assets\Scripts\MovementPattern.cs" />
+     <Compile Include="Assets\Scripts\Ship\AcceleratorZone.cs" />
      <Compile Include="Assets\Scripts\Ship\Bullet.cs" />
      <Compile Include="Assets\Scripts\Ship\BulletGun.cs" />
      <Compile Include="Assets\Scripts\Ship\Laser.cs" />
      <Compile Include="Assets\Scripts\Ship\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Ship\ShipController.cs" />
-     <Compile Include="Assets\ScrollingBackground.cs" />
-     <Compile Include="Assets\SpawnAreaController.cs" />
-     <Compile Include="Assets\Swawner.cs" />
+     <Compile Include="Assets\Scripts\UI\LineUIController.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuController.cs" />
+     <Compile Include="Assets\Scripts\Upgrades.cs" />
+     <Compile Include="Assets\Scripts\Weapons\BulletController.cs" />
+     <Compile Include="Assets\Scripts\Weapons\LaserController.cs" />
+     <Compile Include="Assets\Scripts\Weapons\LaserGun.cs" />
+     <Compile Include="Assets\Scripts\Weapons\ProjectileController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 public class Upgrades {
-    public enum upgrade_type  {LDamage, LSpeed, LCooldown, BDamage, BSpeed, BCooldown, SSpeed, SHealth, RArea, RTurn, RCooldown};
+    public enum upgrade_type  {LDamage, LSpeed, LCooldown, BDamage, BSpeed, BCooldown, SSpeed, SHealth, SRestore, RArea, RTurn, RCooldown};
     GameInfo gameInfo;
     public Action<int> upgradeFunction;
 
@@ -38,6 +38,9 @@ public class Upgrades {
                 return true;
             case upgrade_type.SHealth:
                 upgradeFunction = upgradeShipHealth;
+                return true;
+            case upgrade_type.SRestore:
+                upgradeFunction = restoreShipHealth;
                 return true;
             case upgrade_type.SSpeed:
                 upgradeFunction = upgradeShipSpeed;
@@ -95,11 +98,23 @@ public class Upgrades {
         gameInfo.shipSpeedLevel += levels;
         gameInfo.shipHSpeed += gameInfo.s.hSpeed + gameInfo.shipSpeedLevel * gameInfo.shipHPerLevel;
         gameInfo.shipVSpeed += gameInfo.s.vSpeed + gameInfo.shipSpeedLevel * gameInfo.shipVPerLevel;
+        ShipController.recalcSpeed();
     }
 
     private void upgradeShipHealth(int levels = 1)
     {
-        gameInfo.increaseShipHealth(levels);
+        float maxHealth = gameInfo.s.baseHealth + gameInfo.shipHealthLevel * gameInfo.shipHealthPerLevel;
+        float healthDiff = maxHealth - gameInfo.shipHealth;
+        gameInfo.shipHealthLevel += levels;
+        UnityEngine.UI.Slider hBar = GameObject.Find("HealthBar").GetComponent < UnityEngine.UI.Slider>();
+        hBar.maxValue = gameInfo.s.baseHealth + gameInfo.shipHealthLevel * gameInfo.shipHealthPerLevel;
+        hBar.value = gameInfo.s.baseHealth - healthDiff + gameInfo.shipHealthLevel * gameInfo.shipHealthPerLevel;
+        gameInfo.shipHealth = gameInfo.s.baseHealth - healthDiff + gameInfo.shipHealthLevel * gameInfo.shipHealthPerLevel;
+    }
+
+    private void restoreShipHealth(int spending)
+    {
+
     }
 
 

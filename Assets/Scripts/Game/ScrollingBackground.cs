@@ -30,23 +30,5 @@ public class ScrollingBackground : MonoBehaviour {
             currentBackground = createNewBackground(Camera.main.orthographicSize + myBounds.extents.y + 17);
         }
     }
-    // Update is called once per frame
 
-    /*
-void Update () {
-    SpriteRenderer rend = this.GetComponent<SpriteRenderer>();
-
-    float b = rend.bounds.max.y;
-    if (b <= 45 && !alreadySpawned)
-    {
-        alreadySpawned = true;
-        background = GameObject.Instantiate(background);
-        background.GetComponent<Rigidbody2D>().position = new Vector2(0, b + rend.bounds.extents.y);
-    }
-    if (b <= -90)
-    {
-        Destroy(this.gameObject);
-    }
-}
-*/
 }

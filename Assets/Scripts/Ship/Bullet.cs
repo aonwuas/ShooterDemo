@@ -16,9 +16,15 @@ public class Bullet : ProjectileController {
     }
 
 	void OnTriggerEnter2D(Collider2D other)	{
-
 		if( other.tag == "Enemy" ){
-			this.controller.DealDamage(other.gameObject.GetComponent<Enemy>(), this);
+            if (other.name.Equals("Chaser(Clone)"))
+            {
+                this.controller.DealDamage(other.gameObject.GetComponent<ChaseEnemy>(), this);
+            }
+            if (other.name.Equals("Enemy(Clone)"))
+            {
+                this.controller.DealDamage(other.gameObject.GetComponent<Enemy>(), this);
+            }
 		}
 	}
 }

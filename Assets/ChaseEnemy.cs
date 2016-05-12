@@ -1,45 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour
-{
+public class ChaseEnemy : Enemy {
+
     GameInfo gameInfo;
     public float damage;
-    public int pointValue;
+    new public int pointValue;
     private Vector2 _startPosition;
-    public float _amplitude;
-	public float _enemySpeed;
-    public float _health;
+    new public float _enemySpeed;
+    new public float _health;
     public bool _vulnerable = false;
     float vertExtent, horzExtent;
-    MovementPattern.ZigZagPattern move;
-
-    //public float _currentSpeed;
+    MovementPattern.TargetedPattern tmove;
 
     void Awake()
     {
-        _amplitude = 10.3f;
         gameInfo = GameObject.FindGameObjectWithTag("GameInfo").transform.GetComponent<GameInfo>();
     }
 
-    // Use this for initialization
-    void Start()
-    {
+
+	// Use this for initialization
+	void Start () {
+        _health = Mathf.Ceil(gameInfo.enemyHealth * gameInfo._difficultyLevel / 5f);
+        damage = 1;
+        pointValue = 2;
         vertExtent = Camera.main.orthographicSize;
         horzExtent = vertExtent * Screen.width / Screen.height;
-        _health = gameInfo.enemyHealth * gameInfo._difficultyLevel;
-		_enemySpeed = gameInfo._difficultyLevel * gameInfo.enemySpeed;
-        _startPosition = this.transform.position;
-        damage = 5;
-        pointValue = 5;
-        move = new MovementPattern.ZigZagPattern(80, 15, 25, this.gameObject);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        move.Move();
+        tmove = new MovementPattern.TargetedPattern(30, 1f, this.gameObject, GameObject.FindGameObjectWithTag("Player"));
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        tmove.Move();
         if (!_vulnerable)
         {
             if (transform.position.x >= -horzExtent && transform.position.x <= horzExtent && transform.position.y >= -vertExtent && transform.position.y <= vertExtent)
@@ -47,25 +39,23 @@ public class Enemy : MonoBehaviour
                 _vulnerable = true;
             }
         }
+	}
+
+    private void Die()
+    {
+        gameInfo.addPoints(this.GetComponent<ChaseEnemy>());
+        Destroy(this.gameObject);
     }
 
-    public void Hurt(float damage)
+
+    new public void Hurt(float damage)
     {
         if (this._vulnerable) { _health -= damage; }
-        if (_health <= 0){
-			Die();
+        if (_health <= 0)
+        {
+            Die();
         }
     }
-    
-    void FixedUpdate()
-    {
-
-    }
-
-	private void Die(){
-        gameInfo.addPoints(this);
-		Destroy(this.gameObject);
-	}
 
     void OnTriggerEnter2D(Collider2D other)
     {
